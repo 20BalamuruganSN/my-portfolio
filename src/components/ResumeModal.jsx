@@ -11,35 +11,46 @@ const ResumeModal = ({ onClose }) => {
 
     try {
       // Show loading state
-      const originalText = '📥 Download PDF';
       const downloadBtn = document.querySelector('.download-btn');
+      const originalHTML = downloadBtn?.innerHTML;
+      
       if (downloadBtn) {
-        downloadBtn.textContent = '⏳ Generating PDF...';
+        downloadBtn.innerHTML = '⏳ Generating PDF...';
         downloadBtn.disabled = true;
       }
+
+      // Add a small delay to ensure the DOM is ready
+      await new Promise(resolve => setTimeout(resolve, 100));
 
       const canvas = await html2canvas(element, {
         scale: 2, // Higher quality
         useCORS: true,
         logging: false,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        width: element.scrollWidth,
+        height: element.scrollHeight,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: element.scrollWidth,
+        windowHeight: element.scrollHeight
       });
 
-      const imgData = canvas.toDataURL('image/png');
+      const imgData = canvas.toDataURL('image/png', 1.0);
       const pdf = new jsPDF('p', 'mm', 'a4');
       const imgWidth = 210; // A4 width in mm
-      const pageHeight = 295; // A4 height in mm
+      const pageHeight = 297; // A4 height in mm (fixed from 295 to 297)
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      
       let heightLeft = imgHeight;
-
       let position = 0;
 
+      // Add first page
       pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
 
       // Add new pages if content is too long
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight + pageHeight;
         pdf.addPage();
         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
@@ -49,7 +60,7 @@ const ResumeModal = ({ onClose }) => {
 
       // Restore button state
       if (downloadBtn) {
-        downloadBtn.textContent = originalText;
+        downloadBtn.innerHTML = originalHTML;
         downloadBtn.disabled = false;
       }
 
@@ -60,7 +71,7 @@ const ResumeModal = ({ onClose }) => {
       // Restore button state on error
       const downloadBtn = document.querySelector('.download-btn');
       if (downloadBtn) {
-        downloadBtn.textContent = '📥 Download PDF';
+        downloadBtn.innerHTML = '📥 Download PDF';
         downloadBtn.disabled = false;
       }
     }
@@ -79,13 +90,13 @@ const ResumeModal = ({ onClose }) => {
           <div className="flex gap-3">
             <button
               onClick={handleDownload}
-              className="btn-primary text-sm py-2 px-4"
+              className="download-btn btn-primary text-sm py-2 px-4 flex items-center gap-2"
             >
               📥 Download PDF
             </button>
             <button
               onClick={handlePrint}
-              className="btn-outline text-sm py-2 px-4"
+              className="btn-outline text-sm py-2 px-4 flex items-center gap-2"
             >
               🖨️ Print
             </button>
@@ -98,10 +109,10 @@ const ResumeModal = ({ onClose }) => {
           </div>
         </div>
 
-        {/* Resume Content */}
+        {/* Resume Content - ATTACH THE REF HERE */}
         <div className="overflow-y-auto max-h-[calc(90vh-80px)] p-8">
-          <div className="max-w-3xl mx-auto">
-
+          <div ref={resumeRef} className="max-w-3xl mx-auto bg-white"> {/* Added bg-white for better contrast */}
+            
             {/* Header */}
             <div className="text-center mb-8">
               <h1 className="text-4xl font-bold text-dark mb-2">BALA MURUGAN</h1>
