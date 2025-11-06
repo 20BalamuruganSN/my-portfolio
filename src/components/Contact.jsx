@@ -100,7 +100,7 @@ const Contact = () => {
                   { name: 'GitHub', icon: '🐙', link: 'https://github.com' },
                   { name: 'LinkedIn', icon: '💼', link: 'https://linkedin.com' },
                   { name: 'Twitter', icon: '🐦', link: 'https://twitter.com' },
-                  { name: 'Portfolio', icon: '🌐', link: '#' }
+                //   { name: 'Portfolio', icon: '🌐', link: '#' }
                 ].map((social, index) => (
                   <a
                     key={index}
