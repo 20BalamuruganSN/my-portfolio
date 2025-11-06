@@ -46,7 +46,7 @@ const Contact = () => {
       icon: '💼',
       title: 'LinkedIn',
       value: 'Connect with me',
-      link: 'https://linkedin.com/in/your-profile'
+      link: 'https://linkedin.com/in/bala-murugan-34a7bb244'
     }
   ];
 
