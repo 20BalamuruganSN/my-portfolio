@@ -39,8 +39,8 @@ const Contact = () => {
     {
       icon: '📍',
       title: 'Location',
-      value: 'India',
-      link: null
+      value: 'Perungudi, Chennai',
+      link: 'https://maps.app.goo.gl/2N2pTt5tJtQeCq1o7'
     },
     {
       icon: '💼',
@@ -54,7 +54,7 @@ const Contact = () => {
     <section id="contact" className="py-20 bg-white">
       <div className="container">
         <h2 className="section-title">Get In Touch</h2>
-        
+
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Information */}
           <div className="space-y-8">
@@ -63,7 +63,7 @@ const Contact = () => {
                 Let's Work Together
               </h3>
               <p className="text-lg text-gray-600 mb-8">
-                I'm always interested in new opportunities and exciting projects. 
+                I'm always interested in new opportunities and exciting projects.
                 Whether you have a question or just want to say hi, I'll try my best to get back to you!
               </p>
             </div>
@@ -76,8 +76,8 @@ const Contact = () => {
                   <div className="flex-1">
                     <h4 className="font-semibold text-dark">{method.title}</h4>
                     {method.link ? (
-                      <a 
-                        href={method.link} 
+                      <a
+                        href={method.link}
                         className="text-primary hover:text-secondary transition-colors"
                         target={method.link.startsWith('http') ? '_blank' : '_self'}
                         rel={method.link.startsWith('http') ? 'noopener noreferrer' : ''}
@@ -100,7 +100,7 @@ const Contact = () => {
                   { name: 'GitHub', icon: '🐙', link: 'https://github.com' },
                   { name: 'LinkedIn', icon: '💼', link: 'https://linkedin.com' },
                   { name: 'Twitter', icon: '🐦', link: 'https://twitter.com' },
-                //   { name: 'Portfolio', icon: '🌐', link: '#' }
+                  //   { name: 'Portfolio', icon: '🌐', link: '#' }
                 ].map((social, index) => (
                   <a
                     key={index}
@@ -151,7 +151,7 @@ const Contact = () => {
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
                   Subject *
@@ -167,7 +167,7 @@ const Contact = () => {
                   placeholder="What's this about?"
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                   Message *
@@ -183,7 +183,7 @@ const Contact = () => {
                   placeholder="Tell me about your project or just say hello!"
                 ></textarea>
               </div>
-              
+
               <button
                 type="submit"
                 className="w-full btn-primary"
